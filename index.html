@@ -15,17 +15,17 @@
   <style>
     :root{--bg:#f4f4f4;--card:#fff;--ink:#111;--muted:#666;--line:#222;--soft:#e5e5e5;--accent:#111;}
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.35}
+    body{margin:0;font-family:Avenir, 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.35}
     .wrap{max-width:760px;margin:0 auto;padding:18px 14px 90px}
     .top{background:var(--card);border:1px solid #ddd;border-radius:16px;padding:18px 16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
     .logo-wrap{text-align:center;margin-bottom:12px}
-    .logo-wrap img{width:145px;max-width:55%;height:auto;display:inline-block;border:0}
-    .brand{text-align:center;text-transform:uppercase;font-weight:900;font-size:20px;letter-spacing:.2px;margin-bottom:4px}
+    .logo-wrap img{width:105px;max-width:44%;height:auto;display:inline-block;border:0}
+    .brand{text-align:center;text-transform:uppercase;font-weight:800;font-size:20px;letter-spacing:.6px;margin-bottom:4px}
     .subtitle{text-align:center;font-size:13px;text-transform:uppercase;border-top:4px double #111;padding-top:5px;margin:0 8px;color:#111}
     .note{font-size:13px;color:var(--muted);margin:12px 0 0;text-align:center}
-    h2{font-size:17px;margin:20px 0 10px;text-transform:uppercase;letter-spacing:.2px;border-bottom:2px solid #111;padding-bottom:6px}
+    h2{font-size:16px;margin:20px 0 10px;text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid #111;padding-bottom:6px;font-weight:800}
     .card{background:var(--card);border:1px solid #ddd;border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
-    label{display:block;font-weight:700;font-size:14px;margin:10px 0 5px}
+    label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 5px;letter-spacing:.15px}
     input,textarea,select{width:100%;border:1px solid #bbb;border-radius:10px;padding:12px 11px;font-size:16px;background:#fff;color:#111;outline:none}
     textarea{min-height:88px;resize:vertical}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -146,14 +146,15 @@
     doc.setDrawColor(0);
     doc.setTextColor(0);
 
-    // LOGO CENTRATO IN ALTO
+    // LOGO CENTRATO, PICCOLO E PROPORZIONATO
+    // Dimensioni reali rispettate: non viene stirato.
     try {
-      doc.addImage(logoData, 'JPEG', 80, 6, 50, 28);
+      doc.addImage(logoData, 'JPEG', 96.0, 7, 18, 18.75);
     } catch(e) {}
 
     // TESTI SOTTO AL LOGO
     doc.setFont('helvetica','bold');
-    doc.setFontSize(15);
+    doc.setFontSize(14);
     doc.text('STUDIO MEDICO PROF. MARCO ROGLIANI',105,42,{align:'center'});
 
     doc.setLineWidth(.45);
@@ -162,11 +163,11 @@
     doc.line(18,47.2,192,47.2);
 
     doc.setFont('helvetica','normal');
-    doc.setFontSize(9.2);
+    doc.setFontSize(8.8);
     doc.text('CHIRURGIA PLASTICA RICOSTRUTTIVA - MEDICINA E CHIRURGIA ESTETICA',105,52,{align:'center'});
   }
-  function footer(doc){doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.text('prof. dott. Marco Rogliani M.D. Ph. D. - Universita degli studi di Roma “Tor Vergata” - cell +393473358676',105,286,{align:'center'});}
-  function section(doc,title,y){doc.setFillColor(210); doc.setDrawColor(0); doc.rect(15,y,180,8,'FD'); doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(title,17,y+5.7); return y+8}
+  function footer(doc){doc.setFont('helvetica','normal'); doc.setFontSize(7.6); doc.text('prof. dott. Marco Rogliani M.D. Ph. D. - Universita degli studi di Roma “Tor Vergata” - cell +393473358676',105,286,{align:'center'});}
+  function section(doc,title,y){doc.setFillColor(210); doc.setDrawColor(0); doc.rect(15,y,180,8,'FD'); doc.setFont('helvetica','bold'); doc.setFontSize(11.2); doc.text(title,17,y+5.7); return y+8}
   function wrapFit(doc,text,w,maxLines,fontSize){
     text=clean(text); if(!text)return [];
     let fs=fontSize; let lines=[];
@@ -177,7 +178,7 @@
   function field(doc,label,value,x,y,w,h,opts={}){
     doc.setDrawColor(0); doc.setLineWidth(.15); doc.rect(x,y,w,h);
     doc.setFillColor(238); doc.rect(x,y,w,6,'F'); doc.setDrawColor(0); doc.rect(x,y,w,6);
-    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.text(label,x+2,y+4.2);
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.text(label,x+2,y+4.1);
     doc.setFont('helvetica','normal'); const lines=wrapFit(doc,value,w-4,Math.max(1,Math.floor((h-8)/4.1)),opts.fontSize||8.5);
     let ty=y+10; lines.forEach(line=>{doc.text(line,x+2,ty); ty+=4.1});
   }
